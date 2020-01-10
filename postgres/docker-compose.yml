@@ -1,0 +1,26 @@
+version: '3.7'
+services:
+  db:
+    image: postgres:10.7-alpine
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres:/var/lib/postgresql/data/
+
+  ui:
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: user
+      PGADMIN_DEFAULT_PASSWORD: pass
+    ports:
+      - 54321:80
+    volumes:
+      - pgadmin:/var/lib/pgadmin/
+
+volumes:
+  pgadmin: {}
+  postgres: {}
